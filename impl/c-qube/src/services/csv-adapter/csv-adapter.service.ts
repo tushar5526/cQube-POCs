@@ -661,12 +661,13 @@ export class CsvAdapterService {
     for (const directory of directories) {
       const programs = fss.readdirSync(path.join(minioFolderPath, directory));
       for (const program of programs) {
-        await this.differenceGeneratorService.combineDeltaFiles(
+        const res = await this.differenceGeneratorService.combineDeltaFiles(
           path.join(minioFolderPath, directory, program),
           null,
           `./ingest/programs/${program}`,
         );
-        await this.ingestData({});
+        if(res)
+          await this.ingestData({});
       }
     }
   }

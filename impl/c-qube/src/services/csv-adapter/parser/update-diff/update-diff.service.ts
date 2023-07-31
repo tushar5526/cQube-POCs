@@ -166,7 +166,7 @@ export class DifferenceGeneratorService {
 
     if (!filenames || !filenames.length) {
       console.log('No updates found');
-      return;
+      return false;
     }
 
     // we are assuming that each row of csv has unique combination of dimensions and timeDimensions
