@@ -7,13 +7,21 @@ import {
 } from '../../types/parser';
 import { readCSVFile } from '../utils/csvreader';
 const fs = require('fs').promises;
+const { execSync } = require('child_process');
 
 export const createDimensionGrammarFromCSVDefinition = async (
   csvFilePath: string,
 ): Promise<DimensionGrammar> => {
   // read csvPath
   const [row1, row2, row3] = await readCSVFile(csvFilePath);
-  console.log(row1, row2, row3);
+
+  try {
+    const pwdResult = execSync('pwd');
+    console.log(`Current working directory: ${pwdResult.toString()}`);
+  } catch (error) {
+    console.error(`Error executing command: ${error}`);
+  }
+  console.log(csvFilePath, row1, row2, row3);
   // Naming convention for event is => `<event name>-event.csv`
   // Naming comvention for dimension is => `<dimension name>-dimenstion.csv`
   const dimensionName = csvFilePath
