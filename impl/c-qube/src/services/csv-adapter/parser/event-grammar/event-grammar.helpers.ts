@@ -13,7 +13,7 @@ export const createDimensionGrammarFromCSVDefinition = async (
 ): Promise<DimensionGrammar> => {
   // read csvPath
   const [row1, row2, row3] = await readCSVFile(csvFilePath);
-
+  console.log(row1, row2, row3);
   // Naming convention for event is => `<event name>-event.csv`
   // Naming comvention for dimension is => `<dimension name>-dimenstion.csv`
   const dimensionName = csvFilePath
@@ -46,6 +46,8 @@ export const createDimensionGrammarFromCSVDefinition = async (
       type: value.trim() as ColumnType,
     };
   });
+
+  console.log(dimensionColumns, dimensionName, pk, indexes);
 
   const dimensionGrammar = createCompositeDimensionGrammars(
     dimensionColumns,
