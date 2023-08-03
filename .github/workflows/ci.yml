@@ -58,7 +58,7 @@ jobs:
       - name: Tests
         working-directory: impl/c-qube
         run: |
-          yarn test
+          yarn test src/services/csv-adapter/parser/event-grammar/event-grammar.service.spec.ts
           yarn test:cov
 
       - name: Stop DBs
